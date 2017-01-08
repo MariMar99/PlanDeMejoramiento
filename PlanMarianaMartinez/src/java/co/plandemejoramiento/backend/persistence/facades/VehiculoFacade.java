@@ -15,9 +15,9 @@ import javax.persistence.PersistenceContext;
  * @author Mariana
  */
 @Stateless
-public class VehiculoFacade extends AbstractFacade<Vehiculo> implements VehiculoFacadeLocal {
+public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
-    @PersistenceContext(unitName = "PlanConcesionarioPU")
+    @PersistenceContext(unitName = "PlanMarianaMartinezPU")
     private EntityManager em;
 
     @Override
