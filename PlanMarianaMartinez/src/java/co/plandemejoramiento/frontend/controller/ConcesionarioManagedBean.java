@@ -2,6 +2,7 @@ package co.plandemejoramiento.frontend.controller;
 
 import co.plandemejoramiento.backend.persistence.entity.Concesionario;
 import co.plandemejoramiento.backend.persistence.facades.ConcesionarioFacade;
+import co.plandemejoramiento.frontend.converter.IManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "concesionarioManagedBean")
 @SessionScoped
-public class ConcesionarioManagedBean implements Serializable {
+public class ConcesionarioManagedBean implements Serializable, IManagedBean<Concesionario> {
 
     @EJB private ConcesionarioFacade concesionariofc;
     private Concesionario concesionario;
@@ -62,6 +63,11 @@ public class ConcesionarioManagedBean implements Serializable {
             return concesionariofc.findAll();
         } catch (Exception e) {
         }return null;
+    }
+
+    @Override
+    public Concesionario getObject(Integer i) {
+        return concesionariofc.find(i);
     }
             
 }

@@ -5,6 +5,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import co.plandemejoramiento.backend.persistence.entity.Cliente;
 import co.plandemejoramiento.backend.persistence.facades.ClienteFacade;
+import co.plandemejoramiento.frontend.converter.IManagedBean;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -16,7 +17,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "clienteManagedBean")
 @SessionScoped
-public class ClienteManagedBean implements Serializable {
+public class ClienteManagedBean implements Serializable, IManagedBean<Cliente> {
 
     @EJB private ClienteFacade clientefc;
     private Cliente cliente;
@@ -63,6 +64,11 @@ public class ClienteManagedBean implements Serializable {
             return clientefc.findAll();
         } catch (Exception e) {
         }return null;
+    }
+
+    @Override
+    public Cliente getObject(Integer i) {
+        return clientefc.find(i);
     }
             
 }

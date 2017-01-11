@@ -2,6 +2,7 @@ package co.plandemejoramiento.frontend.controller;
 
 import co.plandemejoramiento.backend.persistence.facades.VehiculoFacade;
 import co.plandemejoramiento.backend.persistence.entity.Vehiculo;
+import co.plandemejoramiento.frontend.converter.IManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "vehiculoManagedBean")
 @SessionScoped
-public class VehiculoManagedBean implements Serializable {
+public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo> {
 
     @EJB private VehiculoFacade vehiculofc;
     private Vehiculo vehiculo;
@@ -48,6 +49,11 @@ public class VehiculoManagedBean implements Serializable {
             vehiculofc.create(vehiculo);
         } catch (Exception e) {
         }
+    }
+
+    @Override
+    public Vehiculo getObject(Integer i) {
+        return vehiculofc.find(i);
     }
     
     

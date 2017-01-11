@@ -2,6 +2,7 @@ package co.plandemejoramiento.frontend.controller;
 
 import co.plandemejoramiento.backend.persistence.entity.Venta;
 import co.plandemejoramiento.backend.persistence.facades.VentaFacade;
+import co.plandemejoramiento.frontend.converter.IManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "ventaManagedBean")
 @SessionScoped
-public class VentaManagedBean implements Serializable {
+public class VentaManagedBean implements Serializable, IManagedBean<Venta> {
 
     @EJB private VentaFacade ventafc;
     private Venta venta;
@@ -62,6 +63,11 @@ public class VentaManagedBean implements Serializable {
             return ventafc.findAll();
         } catch (Exception e) {
         }return null;
+    }
+
+    @Override
+    public Venta getObject(Integer i) {
+        return ventafc.find(i);
     }
             
 }
