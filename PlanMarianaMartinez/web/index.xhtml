@@ -10,29 +10,47 @@
         Hello from Facelets
         <br />
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        
         <f:view>
 
 
             <h:form>
-                <h1><h:outputText value="Create/Edit"/></h1>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="IdVehiculo:" for="idVehiculo" />
-                    <h:inputText id="idVehiculo" value="#{vehiculoManagedBean.vehiculo.idVehiculo}" title="IdVehiculo" required="true" requiredMessage="The IdVehiculo field is required."/>
-                    <h:outputLabel value="Marca:" for="marca" />
-                    <h:inputText id="marca" value="#{vehiculoManagedBean.vehiculo.marca}" title="Marca" required="true" requiredMessage="The Marca field is required."/>
-                    <h:outputLabel value="Modelo:" for="modelo" />
-                    <h:inputText id="modelo" value="#{vehiculoManagedBean.vehiculo.modelo}" title="Modelo" required="true" requiredMessage="The Modelo field is required."/>
-                    <h:outputLabel value="Precio:" for="precio" />
-                    <h:inputText id="precio" value="#{vehiculoManagedBean.vehiculo.precio}" title="Precio" required="true" requiredMessage="The Precio field is required."/>
-                    <h:outputLabel value="CodConcesionario:" for="codConcesionario" />
-                    <h:selectOneMenu id="codConcesionario" value="#{vehiculoManagedBean.vehiculo.codConcesionario}" title="CodConcesionario" required="true" requiredMessage="The CodConcesionario field is required.">
-                        <!-- TODO: update below reference to list of available items-->
-                        <f:selectItems value="#{fixme}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{vehiculoManagedBean.listarVehiculo()}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdVehiculo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idVehiculo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Marca"/>
+                        </f:facet>
+                        <h:outputText value="#{item.marca}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Modelo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.modelo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Precio"/>
+                        </f:facet>
+                        <h:outputText value="#{item.precio}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="CodConcesionario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codConcesionario}"/>
+                    </h:column>
+                </h:dataTable>
             </h:form>
         </f:view>
-        
+
 
     </h:body>
 </html>
