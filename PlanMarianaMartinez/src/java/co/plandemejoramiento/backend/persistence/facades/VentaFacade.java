@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Mariana
  */
 @Stateless
-public class VentaFacade extends AbstractFacade<Venta> {
+public class VentaFacade extends AbstractFacade<Venta> implements VentaFacadeLocal {
 
     @PersistenceContext(unitName = "PlanMarianaMartinezPU")
     private EntityManager em;

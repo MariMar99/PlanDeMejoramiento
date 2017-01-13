@@ -1,14 +1,15 @@
 package co.plandemejoramiento.frontend.controller;
 
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+//import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import co.plandemejoramiento.backend.persistence.entity.Cliente;
-import co.plandemejoramiento.backend.persistence.facades.ClienteFacade;
+import co.plandemejoramiento.backend.persistence.facades.ClienteFacadeLocal;
 import co.plandemejoramiento.frontend.converter.IManagedBean;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 
 
 /**
@@ -16,10 +17,11 @@ import javax.ejb.EJB;
  * @author Mariana
  */
 @Named(value = "clienteManagedBean")
-@SessionScoped
+//@SessionScoped
+@RequestScoped
 public class ClienteManagedBean implements Serializable, IManagedBean<Cliente> {
 
-    @EJB private ClienteFacade clientefc;
+    @EJB private ClienteFacadeLocal clientefc;
     private Cliente cliente;
     
     public ClienteManagedBean() {

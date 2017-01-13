@@ -1,80 +1,72 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        
-        <f:view>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <f:view>
 
 
-            <h:form>
-                <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{vehiculoManagedBean.listarVehiculo()}" var="item">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="IdVehiculo"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idVehiculo}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Marca"/>
-                        </f:facet>
-                        <h:outputText value="#{item.marca}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Modelo"/>
-                        </f:facet>
-                        <h:outputText value="#{item.modelo}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Precio"/>
-                        </f:facet>
-                        <h:outputText value="#{item.precio}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="CodConcesionario"/>
-                        </f:facet>
-                        <h:outputText value="#{item.codConcesionario.nombre}"/>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-        </f:view>
-        <f:view>
+                        <h:form>
+                            <h1><h:outputText value="Create/Edit"/></h1>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Marca:" for="marca" />
+                                <h:inputText id="marca" value="#{vehiculoManagedBean.vehiculo.marca}" title="Marca" required="true" requiredMessage="The Marca field is required."/>
+                                <h:outputLabel value="Modelo:" for="modelo" />
+                                <h:inputText id="modelo" value="#{vehiculoManagedBean.vehiculo.modelo}" title="Modelo" required="true" requiredMessage="The Modelo field is required."/>
+                                <h:outputLabel value="Precio:" for="precio" />
+                                <h:inputText id="precio" value="#{vehiculoManagedBean.vehiculo.precio}" title="Precio" required="true" requiredMessage="The Precio field is required."/>
+                                <h:outputLabel value="Concesionario:" for="codConcesionario" />
+                                <h:selectOneMenu id="codConcesionario" value="#{vehiculoManagedBean.vehiculo.codConcesionario}" title="CodConcesionario" required="true" requiredMessage="The CodConcesionario field is required.">
+                                    <f:selectItems value="#{concesionarioManagedBean.listarConcesionario()}" var="conList" itemLabel="#{conList.nombre}"/>
+                                </h:selectOneMenu>
+                                <h:commandButton value="Registrar" actionListener="#{vehiculoManagedBean.registrarVehiculo()}"
+                            </h:panelGrid>
+                        </h:form>
+                    </f:view>
 
 
-            <h:form>
-                <h1><h:outputText value="Create/Edit"/></h1>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="IdVehiculo:" for="idVehiculo" />
-                    <h:inputText id="idVehiculo" value="#{vehiculoManagedBean.vehiculo.idVehiculo}" title="IdVehiculo" required="true" requiredMessage="The IdVehiculo field is required."/>
-                    <h:outputLabel value="Marca:" for="marca" />
-                    <h:inputText id="marca" value="#{vehiculoManagedBean.vehiculo.marca}" title="Marca" required="true" requiredMessage="The Marca field is required."/>
-                    <h:outputLabel value="Modelo:" for="modelo" />
-                    <h:inputText id="modelo" value="#{vehiculoManagedBean.vehiculo.modelo}" title="Modelo" required="true" requiredMessage="The Modelo field is required."/>
-                    <h:outputLabel value="Precio:" for="precio" />
-                    <h:inputText id="precio" value="#{vehiculoManagedBean.vehiculo.precio}" title="Precio" required="true" requiredMessage="The Precio field is required."/>
-                    <h:outputLabel value="CodConcesionario:" for="codConcesionario" />
-                    <h:selectOneMenu id="codConcesionario" value="#{vehiculoManagedBean.vehiculo.codConcesionario}" title="CodConcesionario" required="true" requiredMessage="The CodConcesionario field is required.">
-                        <!-- TODO: update below reference to list of available items-->
-                        <f:selectItems value="#{fixme}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-            </h:form>
-        </f:view>
+                </p:layoutUnit>
 
+            </p:layout>
 
+        </h:body>
 
-    </h:body>
+    </f:view>
 </html>
 

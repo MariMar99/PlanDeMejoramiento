@@ -1,24 +1,26 @@
 package co.plandemejoramiento.frontend.controller;
 
 import co.plandemejoramiento.backend.persistence.entity.Concesionario;
-import co.plandemejoramiento.backend.persistence.facades.ConcesionarioFacade;
+import co.plandemejoramiento.backend.persistence.facades.ConcesionarioFacadeLocal;
 import co.plandemejoramiento.frontend.converter.IManagedBean;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+//import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author Mariana
  */
 @Named(value = "concesionarioManagedBean")
-@SessionScoped
+//@SessionScoped
+@RequestScoped
 public class ConcesionarioManagedBean implements Serializable, IManagedBean<Concesionario> {
 
-    @EJB private ConcesionarioFacade concesionariofc;
+    @EJB private ConcesionarioFacadeLocal concesionariofc;
     private Concesionario concesionario;
     
     public ConcesionarioManagedBean() {
