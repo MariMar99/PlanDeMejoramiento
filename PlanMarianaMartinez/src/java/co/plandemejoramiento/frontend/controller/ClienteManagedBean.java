@@ -4,7 +4,7 @@ import javax.inject.Named;
 //import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import co.plandemejoramiento.backend.persistence.entity.Cliente;
-import co.plandemejoramiento.backend.persistence.facades.ClienteFacadeLocal;
+import co.plandemejoramiento.backend.persistence.facades.ClienteFacade;
 import co.plandemejoramiento.frontend.converter.IManagedBean;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -21,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class ClienteManagedBean implements Serializable, IManagedBean<Cliente> {
 
-    @EJB private ClienteFacadeLocal clientefc;
+    @EJB private ClienteFacade clientefc;
     private Cliente cliente;
     
     public ClienteManagedBean() {

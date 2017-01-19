@@ -1,6 +1,6 @@
 package co.plandemejoramiento.frontend.controller;
 
-import co.plandemejoramiento.backend.persistence.facades.VehiculoFacadeLocal;
+import co.plandemejoramiento.backend.persistence.facades.VehiculoFacade;
 import co.plandemejoramiento.backend.persistence.entity.Vehiculo;
 import co.plandemejoramiento.frontend.converter.IManagedBean;
 import javax.inject.Named;
@@ -25,8 +25,9 @@ import org.primefaces.context.RequestContext;
 @ViewScoped
 public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo> {
 
-    @EJB private VehiculoFacadeLocal vehiculofc;
+    @EJB private VehiculoFacade vehiculofc;
     private Vehiculo vehiculo;
+    
     
     public VehiculoManagedBean() {
     }
@@ -97,5 +98,4 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
         FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
-    
 }

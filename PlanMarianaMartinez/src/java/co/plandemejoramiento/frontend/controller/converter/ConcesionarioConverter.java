@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
  *
  * @author Mariana
  */
-//@FacesConverter (forClass = Concesionario.class)
+@FacesConverter (forClass = Concesionario.class)
 public class ConcesionarioConverter extends AbstractConverters {
 
     public ConcesionarioConverter() {

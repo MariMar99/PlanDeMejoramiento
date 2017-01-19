@@ -1,7 +1,7 @@
 package co.plandemejoramiento.frontend.controller;
 
 import co.plandemejoramiento.backend.persistence.entity.Venta;
-import co.plandemejoramiento.backend.persistence.facades.VentaFacadeLocal;
+import co.plandemejoramiento.backend.persistence.facades.VentaFacade;
 import co.plandemejoramiento.frontend.converter.IManagedBean;
 import javax.inject.Named;
 //import javax.enterprise.context.SessionScoped;
@@ -20,7 +20,7 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class VentaManagedBean implements Serializable, IManagedBean<Venta> {
 
-    @EJB private VentaFacadeLocal ventafc;
+    @EJB private VentaFacade ventafc;
     private Venta venta;
     
     public VentaManagedBean() {

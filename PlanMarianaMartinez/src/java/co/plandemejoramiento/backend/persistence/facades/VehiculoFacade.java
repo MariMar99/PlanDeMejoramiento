@@ -6,16 +6,18 @@
 package co.plandemejoramiento.backend.persistence.facades;
 
 import co.plandemejoramiento.backend.persistence.entity.Vehiculo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Mariana
  */
 @Stateless
-public class VehiculoFacade extends AbstractFacade<Vehiculo> implements VehiculoFacadeLocal {
+public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     @PersistenceContext(unitName = "PlanMarianaMartinezPU")
     private EntityManager em;
@@ -28,5 +30,6 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> implements Vehiculo
     public VehiculoFacade() {
         super(Vehiculo.class);
     }
+    
     
 }

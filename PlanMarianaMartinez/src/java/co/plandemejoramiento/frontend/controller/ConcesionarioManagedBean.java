@@ -1,8 +1,9 @@
 package co.plandemejoramiento.frontend.controller;
 
 import co.plandemejoramiento.backend.persistence.entity.Concesionario;
-import co.plandemejoramiento.backend.persistence.facades.ConcesionarioFacadeLocal;
+import co.plandemejoramiento.backend.persistence.facades.ConcesionarioFacade;
 import co.plandemejoramiento.frontend.converter.IManagedBean;
+//import co.plandemejoramiento.frontend.util.JsfUtil;    ----> Se retiro la clase Util
 import javax.inject.Named;
 //import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -10,6 +11,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+//ClaseUtil import javax.faces.component.UIComponent;
+//ClaseUtil import javax.faces.context.FacesContext;
+//ClaseUtil import javax.faces.convert.Converter;
+//ClaseUtil import javax.faces.convert.FacesConverter;
+//ClaseUtil import javax.faces.model.SelectItem;
 
 /**
  *
@@ -20,7 +26,7 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class ConcesionarioManagedBean implements Serializable, IManagedBean<Concesionario> {
 
-    @EJB private ConcesionarioFacadeLocal concesionariofc;
+    @EJB private ConcesionarioFacade concesionariofc;
     private Concesionario concesionario;
     
     public ConcesionarioManagedBean() {
@@ -66,10 +72,13 @@ public class ConcesionarioManagedBean implements Serializable, IManagedBean<Conc
         } catch (Exception e) {
         }return null;
     }
-
+    
     @Override
     public Concesionario getObject(Integer i) {
         return concesionariofc.find(i);
     }
-            
+    
+    
+
+    
 }

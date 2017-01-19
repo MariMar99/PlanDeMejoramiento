@@ -34,6 +34,7 @@ public abstract class AbstractConverters implements Converter{
             }
             
         } catch (Exception e) {
+                context.addMessage(null, new FacesMessage("NO se puede convertir el valor "+ e.getMessage()));
         }
         return null;
     }
