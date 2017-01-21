@@ -27,8 +27,8 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
 
     @EJB private VehiculoFacade vehiculofc;
     private Vehiculo vehiculo;
-    private String precio;   //variable para la consulta de precio
-    
+    private int precio;   //variable para la consulta de precio
+    private List<Vehiculo>  lista;
     public VehiculoManagedBean() {
     }
 
@@ -40,13 +40,22 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
         this.vehiculo = vehiculo;
     }
     
-    public String getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
+
+    public List<Vehiculo> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<Vehiculo> lista) {
+        this.lista = lista;
+    }
+    
 
     @PostConstruct
     public void init(){
@@ -92,12 +101,21 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
          Vehiculo v = vehiculofc.consultarPrecio(vehiculo.getPrecio()).get(0);
          System.out.println("Realizo Consulta "+getPrecio());
     }
-
+    
+    public String listarVehiculosPrecio(){
+       lista = vehiculofc.listarVehiculosPorPrecio(precio);
+       System.out.println("Consulta completa "+lista);
+       return "";
+        
+    }
+    
+    //Converter
     @Override
     public Vehiculo getObject(Integer i) {
         return vehiculofc.find(i);
     }
     
+    //Mensajes
     private void mensajeError(Exception e) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Se ha Producido el siguiente Error: ", e.getMessage()));

@@ -80,8 +80,8 @@ public class ConcesionarioManagedBean implements Serializable, IManagedBean<Conc
     
     
     //Método para iniciar sesión
-    public String iniciarSesion(){
         Concesionario con;
+    public String iniciarSesion(){
         String redireccion = null;
         try {
             con = concesionariofc.iniciarSesion(concesionario);
@@ -119,6 +119,14 @@ public class ConcesionarioManagedBean implements Serializable, IManagedBean<Conc
         context.addMessage(null, new FacesMessage(msg));
         FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
+    }
+
+    public Concesionario getCon() {
+        return con;
+    }
+
+    public void setCon(Concesionario con) {
+        this.con = con;
     }
 
     

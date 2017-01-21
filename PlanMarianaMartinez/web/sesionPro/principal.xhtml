@@ -18,13 +18,15 @@
             </ui:define>
 
             <ui:define name="content">
-                <h1>Bienvenid@!!!</h1>
-                <h:inputText value="#{vehiculoManagedBean.vehiculo.precio}"/>
-                <h:commandButton value="Buscar" actionListener="#{vehiculoManagedBean.preciosAll()}"/>
+                <h1>Bienvenid@!!!<a> #{concesionarioManagedBean.con.clave} </a></h1>
+                <h:form>
+                    <h:inputText value="#{vehiculoManagedBean.precio}"/>
+                <h:commandButton value="Buscar" action="#{vehiculoManagedBean.listarVehiculosPrecio()}"/>
+                </h:form>
                 <f:view>
                     <h:form>
                         <h1><h:outputText value="List"/></h1>
-                        <h:dataTable  value="#{vehiculoManagedBean.preciosAll()}" var="item">
+                        <h:dataTable  value="#{vehiculoManagedBean.lista}" var="item">
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="IdVehiculo"/>
@@ -53,7 +55,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="CodConcesionario"/>
                                 </f:facet>
-                                <h:outputText value="#{item.codConcesionario.nombre}"/>
+                                <h:outputText value="#{item.codConcesionario}"/>
                             </h:column>
                         </h:dataTable>
                     </h:form>
