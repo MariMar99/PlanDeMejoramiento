@@ -6,18 +6,23 @@
 package co.plandemejoramiento.backend.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,6 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Concesionario.findByDireccion", query = "SELECT c FROM Concesionario c WHERE c.direccion = :direccion")
     , @NamedQuery(name = "Concesionario.findByClave", query = "SELECT c FROM Concesionario c WHERE c.clave = :clave")})
 public class Concesionario implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codConcesionario", fetch = FetchType.LAZY)
+    private Collection<Vehiculo> vehiculoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -139,6 +147,15 @@ public class Concesionario implements Serializable {
     @Override
     public String toString() {
         return "co.plandemejoramiento.backend.persistence.entity.Concesionario[ nit=" + nit + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Vehiculo> getVehiculoCollection() {
+        return vehiculoCollection;
+    }
+
+    public void setVehiculoCollection(Collection<Vehiculo> vehiculoCollection) {
+        this.vehiculoCollection = vehiculoCollection;
     }
     
 }

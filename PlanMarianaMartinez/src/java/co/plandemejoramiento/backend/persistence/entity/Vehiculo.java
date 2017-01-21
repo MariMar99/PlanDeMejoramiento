@@ -6,23 +6,21 @@
 package co.plandemejoramiento.backend.persistence.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vehiculo.findByIdVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idVehiculo = :idVehiculo")
     , @NamedQuery(name = "Vehiculo.findByMarca", query = "SELECT v FROM Vehiculo v WHERE v.marca = :marca")
     , @NamedQuery(name = "Vehiculo.findByModelo", query = "SELECT v FROM Vehiculo v WHERE v.modelo = :modelo")
-    , @NamedQuery(name = "Vehiculo.findByCodConcesionario", query = "SELECT v FROM Vehiculo v WHERE v.codConcesionario = :codConcesionario")
+    , @NamedQuery(name = "Vehiculo.validarPrecio", query = "SELECT v FROM Vehiculo v WHERE v.precio > :precio")
     , @NamedQuery(name = "Vehiculo.findByPrecio", query = "SELECT v FROM Vehiculo v WHERE v.precio = :precio")})
 public class Vehiculo implements Serializable {
 
@@ -57,14 +55,11 @@ public class Vehiculo implements Serializable {
     private int modelo;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "codConcesionario")
-    private int codConcesionario;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "precio")
     private int precio;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVehiculo", fetch = FetchType.LAZY)
-    private Collection<Venta> ventaCollection;
+    @JoinColumn(name = "codConcesionario", referencedColumnName = "nit")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Concesionario codConcesionario;
 
     public Vehiculo() {
     }
@@ -73,11 +68,10 @@ public class Vehiculo implements Serializable {
         this.idVehiculo = idVehiculo;
     }
 
-    public Vehiculo(Integer idVehiculo, String marca, int modelo, int codConcesionario, int precio) {
+    public Vehiculo(Integer idVehiculo, String marca, int modelo, int precio) {
         this.idVehiculo = idVehiculo;
         this.marca = marca;
         this.modelo = modelo;
-        this.codConcesionario = codConcesionario;
         this.precio = precio;
     }
 
@@ -105,14 +99,6 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    public int getCodConcesionario() {
-        return codConcesionario;
-    }
-
-    public void setCodConcesionario(int codConcesionario) {
-        this.codConcesionario = codConcesionario;
-    }
-
     public int getPrecio() {
         return precio;
     }
@@ -121,13 +107,12 @@ public class Vehiculo implements Serializable {
         this.precio = precio;
     }
 
-    @XmlTransient
-    public Collection<Venta> getVentaCollection() {
-        return ventaCollection;
+    public Concesionario getCodConcesionario() {
+        return codConcesionario;
     }
 
-    public void setVentaCollection(Collection<Venta> ventaCollection) {
-        this.ventaCollection = ventaCollection;
+    public void setCodConcesionario(Concesionario codConcesionario) {
+        this.codConcesionario = codConcesionario;
     }
 
     @Override

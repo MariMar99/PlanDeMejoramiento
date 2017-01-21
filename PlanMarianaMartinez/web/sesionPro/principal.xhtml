@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -17,7 +19,46 @@
 
             <ui:define name="content">
                 <h1>Bienvenid@!!!</h1>
-                
+                <h:inputText value="#{vehiculoManagedBean.vehiculo.precio}"/>
+                <h:commandButton value="Buscar" actionListener="#{vehiculoManagedBean.preciosAll()}"/>
+                <f:view>
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <h:dataTable  value="#{vehiculoManagedBean.preciosAll()}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdVehiculo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idVehiculo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Marca"/>
+                                </f:facet>
+                                <h:outputText value="#{item.marca}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Modelo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.modelo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Precio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.precio}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="CodConcesionario"/>
+                                </f:facet>
+                                <h:outputText value="#{item.codConcesionario.nombre}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
+
             </ui:define>
 
         </ui:composition>

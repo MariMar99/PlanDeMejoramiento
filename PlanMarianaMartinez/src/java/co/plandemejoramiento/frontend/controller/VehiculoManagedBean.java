@@ -27,7 +27,7 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
 
     @EJB private VehiculoFacade vehiculofc;
     private Vehiculo vehiculo;
-    
+    private String precio;   //variable para la consulta de precio
     
     public VehiculoManagedBean() {
     }
@@ -38,6 +38,14 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
 
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
+    }
+    
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 
     @PostConstruct
@@ -78,6 +86,12 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
             mensajeError(e);
         }
     }
+    
+    //Implementar Consulta
+    public void preciosAll(){
+         Vehiculo v = vehiculofc.consultarPrecio(vehiculo.getPrecio()).get(0);
+         System.out.println("Realizo Consulta "+getPrecio());
+    }
 
     @Override
     public Vehiculo getObject(Integer i) {
@@ -98,4 +112,6 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
         FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
+
+    
 }

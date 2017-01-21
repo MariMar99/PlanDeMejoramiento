@@ -6,6 +6,7 @@
 package co.plandemejoramiento.backend.persistence.facades;
 
 import co.plandemejoramiento.backend.persistence.entity.Vehiculo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
 
     public VehiculoFacade() {
         super(Vehiculo.class);
+    }
+    
+    public List<Vehiculo> consultarPrecio(Integer precio){
+        return em.createNamedQuery("Vehiculo.validarPrecio").setParameter("precio", precio).getResultList();
     }
     
 }
