@@ -6,21 +6,18 @@
 package co.plandemejoramiento.backend.persistence.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,13 +31,14 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Concesionario.findByNit", query = "SELECT c FROM Concesionario c WHERE c.nit = :nit")
     , @NamedQuery(name = "Concesionario.findByNombre", query = "SELECT c FROM Concesionario c WHERE c.nombre = :nombre")
     , @NamedQuery(name = "Concesionario.findByTelefono", query = "SELECT c FROM Concesionario c WHERE c.telefono = :telefono")
-    , @NamedQuery(name = "Concesionario.findByDireccion", query = "SELECT c FROM Concesionario c WHERE c.direccion = :direccion")})
+    , @NamedQuery(name = "Concesionario.findByDireccion", query = "SELECT c FROM Concesionario c WHERE c.direccion = :direccion")
+    , @NamedQuery(name = "Concesionario.findByClave", query = "SELECT c FROM Concesionario c WHERE c.clave = :clave")})
 public class Concesionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "nit")
     private Integer nit;
     @Basic(optional = false)
@@ -57,8 +55,11 @@ public class Concesionario implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "direccion")
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codConcesionario", fetch = FetchType.LAZY)
-    private List<Vehiculo> vehiculoList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "clave")
+    private String clave;
 
     public Concesionario() {
     }
@@ -67,11 +68,12 @@ public class Concesionario implements Serializable {
         this.nit = nit;
     }
 
-    public Concesionario(Integer nit, String nombre, int telefono, String direccion) {
+    public Concesionario(Integer nit, String nombre, int telefono, String direccion, String clave) {
         this.nit = nit;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        this.clave = clave;
     }
 
     public Integer getNit() {
@@ -106,13 +108,12 @@ public class Concesionario implements Serializable {
         this.direccion = direccion;
     }
 
-    @XmlTransient
-    public List<Vehiculo> getVehiculoList() {
-        return vehiculoList;
+    public String getClave() {
+        return clave;
     }
 
-    public void setVehiculoList(List<Vehiculo> vehiculoList) {
-        this.vehiculoList = vehiculoList;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 
     @Override

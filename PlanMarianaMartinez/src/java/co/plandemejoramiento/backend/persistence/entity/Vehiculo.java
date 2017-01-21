@@ -6,7 +6,7 @@
 package co.plandemejoramiento.backend.persistence.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vehiculo.findByIdVehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idVehiculo = :idVehiculo")
     , @NamedQuery(name = "Vehiculo.findByMarca", query = "SELECT v FROM Vehiculo v WHERE v.marca = :marca")
     , @NamedQuery(name = "Vehiculo.findByModelo", query = "SELECT v FROM Vehiculo v WHERE v.modelo = :modelo")
+    , @NamedQuery(name = "Vehiculo.findByCodConcesionario", query = "SELECT v FROM Vehiculo v WHERE v.codConcesionario = :codConcesionario")
     , @NamedQuery(name = "Vehiculo.findByPrecio", query = "SELECT v FROM Vehiculo v WHERE v.precio = :precio")})
 public class Vehiculo implements Serializable {
 
@@ -58,13 +57,14 @@ public class Vehiculo implements Serializable {
     private int modelo;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "codConcesionario")
+    private int codConcesionario;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "precio")
-    private double precio;
+    private int precio;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVehiculo", fetch = FetchType.LAZY)
-    private List<Venta> ventaList;
-    @JoinColumn(name = "codConcesionario", referencedColumnName = "nit")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Concesionario codConcesionario;
+    private Collection<Venta> ventaCollection;
 
     public Vehiculo() {
     }
@@ -73,10 +73,11 @@ public class Vehiculo implements Serializable {
         this.idVehiculo = idVehiculo;
     }
 
-    public Vehiculo(Integer idVehiculo, String marca, int modelo, double precio) {
+    public Vehiculo(Integer idVehiculo, String marca, int modelo, int codConcesionario, int precio) {
         this.idVehiculo = idVehiculo;
         this.marca = marca;
         this.modelo = modelo;
+        this.codConcesionario = codConcesionario;
         this.precio = precio;
     }
 
@@ -104,29 +105,29 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    public double getPrecio() {
+    public int getCodConcesionario() {
+        return codConcesionario;
+    }
+
+    public void setCodConcesionario(int codConcesionario) {
+        this.codConcesionario = codConcesionario;
+    }
+
+    public int getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
     @XmlTransient
-    public List<Venta> getVentaList() {
-        return ventaList;
+    public Collection<Venta> getVentaCollection() {
+        return ventaCollection;
     }
 
-    public void setVentaList(List<Venta> ventaList) {
-        this.ventaList = ventaList;
-    }
-
-    public Concesionario getCodConcesionario() {
-        return codConcesionario;
-    }
-
-    public void setCodConcesionario(Concesionario codConcesionario) {
-        this.codConcesionario = codConcesionario;
+    public void setVentaCollection(Collection<Venta> ventaCollection) {
+        this.ventaCollection = ventaCollection;
     }
 
     @Override

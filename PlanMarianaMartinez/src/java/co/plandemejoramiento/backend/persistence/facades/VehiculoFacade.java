@@ -6,11 +6,9 @@
 package co.plandemejoramiento.backend.persistence.facades;
 
 import co.plandemejoramiento.backend.persistence.entity.Vehiculo;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -30,6 +28,5 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
     public VehiculoFacade() {
         super(Vehiculo.class);
     }
-    
     
 }
