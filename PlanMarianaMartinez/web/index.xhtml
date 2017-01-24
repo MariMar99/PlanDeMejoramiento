@@ -7,24 +7,31 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Plan de Mejoramiento</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Plan de Mejoramiento</title>
+    <link href="resources/css/estilos.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montez|Shadows+Into+Light+Two" rel="stylesheet"/>
+</h:head>
     <h:body>
-        <h:form>
-            <p:messages autoUpdate="true" showDetail="true"/>
-            <h:panelGrid columns="2">
-                <p:outputLabel for="txtNit" value="Usuario"/>
-                <p:inputText id="txtNit" value="#{concesionarioManagedBean.concesionario.nit}" required="true"/>
-                <p:outputLabel for="txtClave" value="Contraseña"/>
-                <p:inputText id="txtClave" value="#{concesionarioManagedBean.concesionario.clave}" required="true"/>
-                <p:column/>
-                <p:commandButton value="Iniciar Sesión" action="#{concesionarioManagedBean.iniciarSesion()}" />
-            </h:panelGrid>
-            <p:separator/>
-        </h:form>
-
+        <div class="texto">
+            <center>
+                <h1>Plan de Mejoramiento</h1>
+                <h3>Aplicación Web/Concesionarios</h3>
+            </center>
+        </div>
+        <div class="card card-container container">
+            <p id="profile-name" class="profile-name-card"></p>
+            <h:form class="form-signin">
+                <p:messages autoUpdate="true" showDetail="true"/>
+                <input type="text" id="inputText" class="form-control" jsf:value="#{concesionarioManagedBean.concesionario.nit}" placeholder="Usuario" required="true" />
+                <input type="password" id="inputPassword" class="form-control" jsf:value="#{concesionarioManagedBean.concesionario.clave}" placeholder="Contraseña" required="true"/>
+                <br/>
+                <center><h:commandButton value="Iniciar Sesión" class="btn btn-success btn-lg btn3d" action="#{concesionarioManagedBean.iniciarSesion()}"/></center>
+            </h:form>
+        </div>
     </h:body>
 </html>
