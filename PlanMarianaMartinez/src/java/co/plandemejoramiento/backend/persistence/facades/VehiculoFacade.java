@@ -35,29 +35,34 @@ public class VehiculoFacade extends AbstractFacade<Vehiculo> {
         super(Vehiculo.class);
     }
     
-    public List<Vehiculo> consultarPrecio(Integer precio){
-        return em.createNamedQuery("Vehiculo.validarPrecio").setParameter("precio", precio).getResultList();
+    //Consulta del modelo más reciente
+    public List<Vehiculo> modeloReciente(){
+        return em.createNamedQuery("Vehiculo.modeloReciente").getResultList();
     }
     
-    public List<Vehiculo> listarVehiculosPorPrecio(int precio){
-        Connection conn=Conexion.getInstance();
-        List<Vehiculo> listaTodos= new ArrayList<>();
-       String sql="SELECT * from vehiculo WHERE precio>?";
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, precio);
-            ResultSet rs = ps.executeQuery();
-        while(rs.next()){
-            Vehiculo vehiculo = new Vehiculo();
-            vehiculo.setIdVehiculo(rs.getInt("idVehiculo"));
-            vehiculo.setMarca(rs.getString("marca"));
-            vehiculo.setModelo(rs.getInt("modelo"));
-            vehiculo.setPrecio(rs.getInt("precio"));
-            listaTodos.add(vehiculo);
-        }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }   return listaTodos;
+    //Consulta de precio mayor dado por el concecionario
+    public List<Vehiculo> consultarPrecio(int precio){
+        return em.createNamedQuery("Vehiculo.validarPrecio").setParameter("precio", precio).getResultList();
     }
+    //public List<Vehiculo> listarVehiculosPorPrecio(int precio){
+    //    Connection conn=Conexion.getInstance();
+    //    List<Vehiculo> listaTodos= new ArrayList<>();
+    //    String sql="SELECT * from vehiculo WHERE precio>?";
+    //    try {
+    //        PreparedStatement ps = conn.prepareStatement(sql);
+    //        ps.setInt(1, precio);
+    //        ResultSet rs = ps.executeQuery();
+    //    while(rs.next()){
+    //        Vehiculo vehiculo = new Vehiculo();
+    //        vehiculo.setIdVehiculo(rs.getInt("idVehiculo"));
+    //        vehiculo.setMarca(rs.getString("marca"));
+    //        vehiculo.setModelo(rs.getInt("modelo"));
+    //        vehiculo.setPrecio(rs.getInt("precio"));
+    //        listaTodos.add(vehiculo);
+    //    }
+    //    } catch (Exception e) {
+    //        e.printStackTrace();
+    //    }   return listaTodos;
+    //}
     
 }

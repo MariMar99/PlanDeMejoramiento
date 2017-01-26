@@ -9,26 +9,36 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+        <link href="../resources/css/estilosInter.css" rel="stylesheet" type="text/css"/>
         <title>Plan de Mejoramiento</title>
         <f:event type="preRenderView" listener="#{plantillaManagedBean.verificarSesion()}"/>
+        <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montez|Shadows+Into+Light+Two" rel="stylesheet"/>
     </h:head>
 
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">
+                <div class="container-fluid"> Plan de Mejoramiento * Concesionario </div>
+            </ui:insert>
+            <br/>
+            <br/>
         </div>
         <div>
-            <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-            </div>
             <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
+                <ui:insert name="content">
+                    <div class="container-fluid">
+                        
+                        Contenido
+                    </div>
+                    
+                </ui:insert>
+                
             </div>
         </div>
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>
+        
 
     </h:body>
 

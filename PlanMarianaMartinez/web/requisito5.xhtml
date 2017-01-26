@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templates/plantilla.xhtml">
+
+            <ui:define name="content">
+                <div class="container-fluid">
+                    <div class="row">
+                            <div class="col-md-12">
+                                    <ul class="breadcrumb">
+                                            <li>
+                                                    <a href="sesionPro/principal.xhtml">Requisitos</a> <span class="divider">/</span>
+                                            </li>
+                                            <li class="active">
+                                                    Requisito Cinco
+                                            </li>
+                                    </ul>
+                            </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <h:form>
+                        <h:inputText value="#{vehiculoManagedBean.precio}"/>
+                        <h:commandButton value="Buscar" action="#{vehiculoManagedBean.preciosAll()}"/>
+                    </h:form>
+                    <br/>
+                    <f:view>
+                        <h:form>
+                            <h:dataTable  value="#{vehiculoManagedBean.lista}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Marca"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.marca}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Modelo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.modelo}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Precio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.precio}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Concesionario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.codConcesionario}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

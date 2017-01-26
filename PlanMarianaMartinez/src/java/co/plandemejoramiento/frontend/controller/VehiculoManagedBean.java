@@ -97,16 +97,24 @@ public class VehiculoManagedBean implements Serializable, IManagedBean<Vehiculo>
     }
     
     //Implementar Consulta
+    //consulta por entities
     public void preciosAll(){
-         Vehiculo v = vehiculofc.consultarPrecio(vehiculo.getPrecio()).get(0);
-         System.out.println("Realizo Consulta "+getPrecio());
+//         Vehiculo v = vehiculofc.consultarPrecio(vehiculo.getPrecio()).get(0);         
+          lista = vehiculofc.consultarPrecio(precio);
+          //vehiculo = vehiculofc.consultarPrecio(vehiculo.getPrecio()).get(precio);
+          System.out.println("Realizo Consulta de Precio por Concesionario"+getPrecio());
     }
-    
-    public String listarVehiculosPrecio(){
-       lista = vehiculofc.listarVehiculosPorPrecio(precio);
-       System.out.println("Consulta completa "+lista);
-       return "";
-        
+    //consulta directa con conexión
+    //public String listarVehiculosPrecio(){
+    //   lista = vehiculofc.listarVehiculosPorPrecio(precio);
+    //   System.out.println("Consulta completa de Precio por Concesionario "+lista);
+    //   return "";        
+    //}
+    //consulta modeloreciente
+    public String modeloReciente(){
+        lista = vehiculofc.modeloReciente();
+        System.out.println("Consulta Modelo Reciente" +lista);
+        return "";
     }
     
     //Converter
